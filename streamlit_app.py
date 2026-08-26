@@ -18,7 +18,15 @@ else:
 
     # Create an OpenAI client.
     client = OpenAI(api_key=openai_api_key)
+check_key=False
+try:
+    client.models.list()
+    check_key=True
 
+except:
+    st.error("Could not validate the API key")
+
+if check_key:
     # Let the user upload a file via `st.file_uploader`.
     uploaded_file = st.file_uploader(
         "Upload a document (.txt or .md)", type=("txt", "md")
